@@ -6,12 +6,21 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
+import to.PrestamosTO;
+import controladores.ControladorActivos;
+import controladores.ControladorPrestamos;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+
+@SuppressWarnings({ "serial", "unused" })
 public class ActivosGUI extends JFrame {
 
 	private JPanel contentPane;
@@ -57,7 +66,21 @@ public class ActivosGUI extends JFrame {
 		lblNewLabel.setBounds(22, 45, 86, 14);
 		contentPane.add(lblNewLabel);
 		
+		final ControladorActivos ca = new ControladorActivos();
+		final String[] columnasCa = {"serial","tipo activo","modelo"};
+		final ControladorPrestamos cp = new ControladorPrestamos();
+		final String[] columnasCp = {"estado retorno","fecha prestamo","fecha entrega","obra prestamo","serial activo","asignado"};
+		final PrestamosTO prestamosTO = new PrestamosTO();
 		JButton EstadoBtn = new JButton("consultar");
+		EstadoBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String estado = estadoActivoTxt.getText();
+				Object[][]datos = ca.EstadoActivos(estado);
+				
+				table.setModel(new DefaultTableModel(datos,columnasCa));
+								
+			}
+		});
 		EstadoBtn.setBounds(22, 79, 89, 23);
 		contentPane.add(EstadoBtn);
 		
@@ -80,6 +103,17 @@ public class ActivosGUI extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		JButton prestadosBtn = new JButton("Consultar Activos");
+		prestadosBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String ced = cedulaTxt.getText();
+				String ser = serialTxt.getText();
+				prestamosTO.setAsignado(ced);
+				prestamosTO.setSerial_activo(ser);				
+				Object[][] datos = cp.ActivosAsignados(prestamosTO);
+				table.setModel(new DefaultTableModel(datos,columnasCp));
+				
+			}
+		});
 		prestadosBtn.setBounds(22, 272, 151, 23);
 		contentPane.add(prestadosBtn);
 		
@@ -105,6 +139,14 @@ public class ActivosGUI extends JFrame {
 		contentPane.add(lblConsultarActivosEn);
 		
 		JButton obrasBtn = new JButton("Consultar");
+		obrasBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String idObra = idObraTxt.getText();
+				int obraId = Integer.parseInt(idObra);
+				Object[][] datos = cp.EquiposEnObra(obraId);
+				table.setModel(new DefaultTableModel(datos,columnasCp));
+			}
+		});
 		obrasBtn.setBounds(320, 79, 89, 23);
 		contentPane.add(obrasBtn);
 		

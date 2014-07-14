@@ -13,7 +13,7 @@ public class ControladorActivos {
 	
 	@SuppressWarnings("unchecked")
 	public Object[][] EstadoActivos(String estado){
-		String estados = "SELECT * FROM activo WHERE estado = "+estado+" ;";
+		String estados = "SELECT * FROM activo WHERE estado = '"+estado+"' ;";
 		Query query = em.createNativeQuery(estados, Activo.class);
 		List<Activo> activos = query.getResultList();
 		int size = activos.size();
@@ -22,8 +22,10 @@ public class ControladorActivos {
 			datos[x][0] = activos.get(x).getSerial();
 			datos[x][1] = activos.get(x).getTipo_activo();
 			datos[x][2] = activos.get(x).getModelo();			
-		}
+			
+		}		
 		return datos;
+		
 	}
 
 }

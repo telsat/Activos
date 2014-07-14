@@ -16,7 +16,8 @@ public class ControladorPrestamos {
 	public Object[][] ActivosAsignados(PrestamosTO prestamosTO){
 		String serial_activo = prestamosTO.getSerial_activo();
 		String cedula = prestamosTO.getAsignado();
-		String activosAsignados = "SELECT * FROM prestamos WHERE asignado = "+cedula+" or serial_activo = "+serial_activo+";";
+		
+		String activosAsignados = "SELECT * FROM prestamos WHERE asignado = '"+cedula+"' or serial_activo = '"+serial_activo+"';";
 		Query query = em.createNativeQuery(activosAsignados,Prestamos.class);
 		List<Prestamos> prestamos = query.getResultList();
 		int size = prestamos.size();
@@ -38,7 +39,7 @@ public class ControladorPrestamos {
 	
 	@SuppressWarnings("unchecked")
 	public Object[][] EquiposEnObra(int obraId){
-		String quer = "SELECT * FROM prestamos WHERE obra_prestamo = "+obraId+" ;";
+		String quer = "SELECT * FROM prestamos WHERE obra_prestamo = '"+obraId+"';";
 		Query query = em.createNativeQuery(quer,Prestamos.class);
 		List<Prestamos> activos = query.getResultList();
 		int size = activos.size();
