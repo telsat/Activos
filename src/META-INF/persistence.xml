@@ -7,6 +7,7 @@
 		<class>entidades.Persona</class>
 		<class>entidades.Prestamos</class>
 		<class>entidades.Proveedor</class>
+		<class>entidades.Codigos</class>
 		<properties>
       		<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
       		<property name="javax.persistence.jdbc.url"    value="jdbc:postgresql://localhost:5432/activos" />

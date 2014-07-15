@@ -50,7 +50,9 @@ public class ActivosGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public ActivosGUI() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 716, 628);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -153,5 +155,15 @@ public class ActivosGUI extends JFrame {
 		table = new JTable();
 		table.setBounds(22, 369, 621, 199);
 		contentPane.add(table);
+		
+		JButton btnNewButton = new JButton("nombrar activo");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				codigosGUI c = new codigosGUI();
+				c.setVisible(true);
+			}
+		});
+		btnNewButton.setBounds(320, 186, 151, 23);
+		contentPane.add(btnNewButton);
 	}
 }
