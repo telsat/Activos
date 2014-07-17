@@ -6,10 +6,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import entidades.Activo;
+import to.ActivoTO;
 import util.EntityManagerUtil;
 
 public class ControladorActivos {
 	private EntityManager em = EntityManagerUtil.getEntityManager();
+	Activo activo = new Activo();
 	
 	@SuppressWarnings("unchecked")
 	public Object[][] EstadoActivos(String estado){
@@ -25,6 +27,39 @@ public class ControladorActivos {
 			
 		}		
 		return datos;
+		
+	}
+	
+	public void GuardarActivo(ActivoTO activoTO){
+		String serialTelsat = activoTO.getSerial_telsat();
+		String serial = activoTO.getSerial();
+		String modelo = activoTO.getModelo();
+		String descripcion = activoTO.getDescripcion();
+		String proveedor = activoTO.getProveedor();
+		String factura = activoTO.getFactura();
+		String foto = activoTO.getFoto();
+		String estado = activoTO.getEstado();
+		int precio = activoTO.getPrecio();
+		String tipoActivo = activoTO.getTipo_activo();
+		
+		try {
+			em.getTransaction().begin();
+			activo.setSerial(serial);
+			activo.setSerial_telsat(serialTelsat);
+			activo.setModelo(modelo);
+			activo.setDescripcion(descripcion);
+			activo.setProveedor(proveedor);
+			activo.setFactura(factura);
+			activo.setFoto(foto);
+			activo.setEstado(estado);
+			activo.setPrecio(precio);
+			activo.setTipo_activo(tipoActivo);
+			em.persist(activo);
+			em.getTransaction().commit();
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		
 	}
 

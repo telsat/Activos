@@ -10,6 +10,8 @@ public class PrestamosTO {
 	private String estado_retorno;
 	private int obra_prestamo;
 	private String serial_activo;
+	
+	
 	public String getId() {
 		return id;
 	}

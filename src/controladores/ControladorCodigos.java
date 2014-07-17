@@ -7,10 +7,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import entidades.Codigos;
+import to.CodigosTO;
 import util.EntityManagerUtil;
 
 public class ControladorCodigos {
 	private EntityManager em = EntityManagerUtil.getEntityManager();
+	Codigos codigos = new Codigos();
+	CodigosTO codigosTO = new CodigosTO();
 	@SuppressWarnings("unchecked")
 	
 	
@@ -46,6 +49,30 @@ public class ControladorCodigos {
 			}
 		
 		return uniqueId.toString();
+	}
+	
+	
+	
+	public void GuardarCodigos(CodigosTO codigosTO){
+		String codigo = codigosTO.getCodigo();
+		String nombre = codigosTO.getNombre();
+		String descripcion = codigosTO.getDescripcion();
+		String estado = codigosTO.getEstado();
+		
+		try {
+			em.getTransaction().begin();
+			codigos.setCodigo(codigo);
+			codigos.setDescripcion(descripcion);
+			codigos.setEstado(estado);
+			codigos.setNombre(nombre);
+			em.persist(codigos);
+			em.getTransaction().commit();
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
 	}
 
 }

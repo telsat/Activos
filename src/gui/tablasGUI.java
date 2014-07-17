@@ -11,12 +11,23 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
+import controladores.ControladorActivos;
+import controladores.ControladorCodigos;
+import controladores.ControladorFactura;
+import controladores.ControladorObras;
+import controladores.ControladorPersonas;
+import controladores.ControladorPrestamos;
+import controladores.ControladorProveedor;
 import to.ActivoTO;
+import to.CodigosTO;
 import to.FacturaTO;
 import to.ObraTO;
 import to.PersonaTO;
 import to.PrestamosTO;
 import to.ProveedorTO;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class tablasGUI extends JFrame {
 	
@@ -26,8 +37,15 @@ public class tablasGUI extends JFrame {
 	PersonaTO perto = new PersonaTO();
 	PrestamosTO presto = new PrestamosTO();
 	ProveedorTO proveto = new ProveedorTO();
+	CodigosTO codto = new CodigosTO();
 	
-	
+	ControladorActivos contrActivos = new ControladorActivos();
+	ControladorCodigos controlCod = new ControladorCodigos();
+	ControladorPrestamos controlPres = new ControladorPrestamos();
+	ControladorFactura cf = new ControladorFactura();
+	ControladorObras co = new  ControladorObras();
+	ControladorPersonas controlPers = new  ControladorPersonas();
+	ControladorProveedor controlProv = new ControladorProveedor();
 
 	private JPanel contentPane;
 	private JTextField telsatSerialTxt;
@@ -191,13 +209,42 @@ public class tablasGUI extends JFrame {
 		panel.add(tipoActivoTxt);
 		tipoActivoTxt.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Guardar");
-		btnNewButton.setBounds(10, 245, 116, 23);
-		panel.add(btnNewButton);
+		JButton activoGuardarBtn = new JButton("Guardar");
+		activoGuardarBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String serialTelsat = telsatSerialTxt.getText();
+				String serial = activoSerialTxt.getText();
+				String modelo = modeloTxt.getText();
+				String descripcion = descripcionTxt.getText();
+				String proveedor = proveeNitTxt.getText();
+				String factura = ActFacturaTxt.getText();
+				String foto = fotoTxt.getText();
+				String estado = EstadoTxt.getText();
+				String price = precioTxt.getText();
+				int precio = Integer.parseInt(price);
+				String tipoActivo = tipoActivoTxt.getText();
+				
+				ato.setDescripcion(descripcion);
+				ato.setEstado(estado);
+				ato.setFactura(factura);
+				ato.setFoto(foto);
+				ato.setModelo(modelo);
+				ato.setPrecio(precio);
+				ato.setProveedor(proveedor);
+				ato.setSerial(serial);
+				ato.setSerial_telsat(serialTelsat);
+				ato.setTipo_activo(tipoActivo);
+				
+				contrActivos.GuardarActivo(ato);				
+				
+			}
+		});
+		activoGuardarBtn.setBounds(10, 245, 116, 23);
+		panel.add(activoGuardarBtn);
 		
-		JButton btnNewButton_7 = new JButton("Limpiar");
-		btnNewButton_7.setBounds(159, 245, 127, 23);
-		panel.add(btnNewButton_7);
+		JButton activoLimpiarBtn = new JButton("Limpiar");
+		activoLimpiarBtn.setBounds(159, 245, 127, 23);
+		panel.add(activoLimpiarBtn);
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Proveedor", null, panel_1, null);
@@ -266,13 +313,35 @@ public class tablasGUI extends JFrame {
 		panel_1.add(filtroTxt);
 		filtroTxt.setColumns(10);
 		
-		JButton btnNewButton_1 = new JButton("Guardar");
-		btnNewButton_1.setBounds(10, 206, 124, 23);
-		panel_1.add(btnNewButton_1);
+		JButton proveedorGuardarBtn = new JButton("Guardar");
+		proveedorGuardarBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String nit = NitTxt.getText();
+				String nombre = proveedorNombreTxt.getText();
+				String direccion = direccionTxt.getText();
+				String telefono = telefonoTxt.getText();
+				String contacto = contactoTxt.getText();
+				String mail = mailTxt.getText();
+				String filtro = filtroTxt.getText();
+				
+				proveto.setContacto(contacto);
+				proveto.setDireccion(direccion);
+				proveto.setEmail(mail);
+				proveto.setFiltro(filtro);
+				proveto.setNit(nit);
+				proveto.setNombre(nombre);
+				proveto.setTelefono(telefono);
+				
+				controlProv.GuardarProveedor(proveto);
+				
+			}
+		});
+		proveedorGuardarBtn.setBounds(10, 206, 124, 23);
+		panel_1.add(proveedorGuardarBtn);
 		
-		JButton btnLimpiar = new JButton("Limpiar");
-		btnLimpiar.setBounds(171, 206, 106, 23);
-		panel_1.add(btnLimpiar);
+		JButton proveedorLimpiarBtn = new JButton("Limpiar");
+		proveedorLimpiarBtn.setBounds(171, 206, 106, 23);
+		panel_1.add(proveedorLimpiarBtn);
 		
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Factura", null, panel_2, null);
@@ -305,13 +374,28 @@ public class tablasGUI extends JFrame {
 		panel_2.add(fechaCompraTxt);
 		fechaCompraTxt.setColumns(10);
 		
-		JButton btnNewButton_2 = new JButton("Guardar");
-		btnNewButton_2.setBounds(10, 160, 122, 23);
-		panel_2.add(btnNewButton_2);
+		JButton facturaGuardarBtn = new JButton("Guardar");
+		facturaGuardarBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String fechaCompra = fechaCompraTxt.getText();
+				
+				String numero = facturaNumeroTxt.getText();
+				String facturaNit = facturaNitTxt.getText();
+				
+				fto.setNit_proveedor(facturaNit);
+				fto.setNumero(numero);
+				
+				cf.GuardarFactura(fto);
+				
+				
+			}
+		});
+		facturaGuardarBtn.setBounds(10, 160, 122, 23);
+		panel_2.add(facturaGuardarBtn);
 		
-		JButton btnLimpiar_1 = new JButton("Limpiar");
-		btnLimpiar_1.setBounds(171, 160, 89, 23);
-		panel_2.add(btnLimpiar_1);
+		JButton facturaLimpiarBtn = new JButton("Limpiar");
+		facturaLimpiarBtn.setBounds(171, 160, 89, 23);
+		panel_2.add(facturaLimpiarBtn);
 		
 		JPanel panel_3 = new JPanel();
 		tabbedPane.addTab("Obra", null, panel_3, null);
@@ -335,13 +419,22 @@ public class tablasGUI extends JFrame {
 		panel_3.add(obraNombreTxt);
 		obraNombreTxt.setColumns(10);
 		
-		JButton btnNewButton_3 = new JButton("Guardar");
-		btnNewButton_3.setBounds(10, 131, 121, 23);
-		panel_3.add(btnNewButton_3);
+		JButton obraGuardarBtn = new JButton("Guardar");
+		obraGuardarBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String idObra = idObraTxt.getText();
+				String obraNombre = obraNombreTxt.getText();
+				oto.setId(idObra);
+				oto.setNombre(obraNombre);
+				co.GuardarObra(oto);
+			}
+		});
+		obraGuardarBtn.setBounds(10, 131, 121, 23);
+		panel_3.add(obraGuardarBtn);
 		
-		JButton btnNewButton_8 = new JButton("Limpiar");
-		btnNewButton_8.setBounds(176, 131, 106, 23);
-		panel_3.add(btnNewButton_8);
+		JButton obraLimpiarBtn = new JButton("Limpiar");
+		obraLimpiarBtn.setBounds(176, 131, 106, 23);
+		panel_3.add(obraLimpiarBtn);
 		
 		JPanel panel_4 = new JPanel();
 		tabbedPane.addTab("Persona", null, panel_4, null);
@@ -374,13 +467,26 @@ public class tablasGUI extends JFrame {
 		panel_4.add(apellidoTxt);
 		apellidoTxt.setColumns(10);
 		
-		JButton btnNewButton_4 = new JButton("Guardar");
-		btnNewButton_4.setBounds(10, 189, 146, 23);
-		panel_4.add(btnNewButton_4);
+		JButton personaGuardarBtn = new JButton("Guardar");
+		personaGuardarBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String cedula = cedulaTxt.getText();
+				String personaNombre = personaNombreTxt.getText();
+				String apellido = apellidoTxt.getText();
+				
+				perto.setApellido(apellido);
+				perto.setCedula(cedula);
+				perto.setNombre(personaNombre);
+				
+				controlPers.GuardarPersona(perto);
+			}
+		});
+		personaGuardarBtn.setBounds(10, 189, 146, 23);
+		panel_4.add(personaGuardarBtn);
 		
-		JButton btnNewButton_9 = new JButton("Limpiar");
-		btnNewButton_9.setBounds(195, 189, 123, 23);
-		panel_4.add(btnNewButton_9);
+		JButton personaLimpiarBtn = new JButton("Limpiar");
+		personaLimpiarBtn.setBounds(195, 189, 123, 23);
+		panel_4.add(personaLimpiarBtn);
 		
 		JPanel panel_5 = new JPanel();
 		tabbedPane.addTab("Prestamos", null, panel_5, null);
@@ -440,13 +546,31 @@ public class tablasGUI extends JFrame {
 		panel_5.add(serialPrestamoTxt);
 		serialPrestamoTxt.setColumns(10);
 		
-		JButton btnNewButton_5 = new JButton("Guardar");
-		btnNewButton_5.setBounds(10, 226, 119, 23);
-		panel_5.add(btnNewButton_5);
+		JButton prestamosGuardarBtn = new JButton("Guardar");
+		prestamosGuardarBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String fechaPres = fechaPrestamoTxt.getText();
+				String fechaEntr = fechaEntregaTxt.getText();
+				String asignado = asignadoTxt.getText();
+				String estadoRet = estadoRetornoTxt.getText();
+				String obraPrestamo = obraPrestadoTxt.getText();
+				int obraP = Integer.parseInt(obraPrestamo);
+				String serialPres = serialPrestamoTxt.getText();
+				
+				presto.setAsignado(asignado);
+				presto.setEstado_retorno(estadoRet);
+				presto.setObra_prestamo(obraP);
+				presto.setSerial_activo(serialPres);
+				
+				controlPres.GuardarPrestamo(presto);
+			}
+		});
+		prestamosGuardarBtn.setBounds(10, 226, 119, 23);
+		panel_5.add(prestamosGuardarBtn);
 		
-		JButton btnNewButton_10 = new JButton("Limpiar");
-		btnNewButton_10.setBounds(175, 226, 133, 23);
-		panel_5.add(btnNewButton_10);
+		JButton prestamosLimpiar = new JButton("Limpiar");
+		prestamosLimpiar.setBounds(175, 226, 133, 23);
+		panel_5.add(prestamosLimpiar);
 		
 		JPanel panel_6 = new JPanel();
 		tabbedPane.addTab("Codigos", null, panel_6, null);
@@ -488,12 +612,27 @@ public class tablasGUI extends JFrame {
 		panel_6.add(codigoEstadoTxt);
 		codigoEstadoTxt.setColumns(10);
 		
-		JButton btnNewButton_6 = new JButton("Guardar");
-		btnNewButton_6.setBounds(10, 196, 115, 23);
-		panel_6.add(btnNewButton_6);
+		JButton codigosGuardarBtn = new JButton("Guardar");
+		codigosGuardarBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String codigo = codigoTxt.getText();
+				String nombre = codigoNombreTxt.getText();
+				String descripcion = codigoDescripcionTxt.getText();
+				String estado = codigoEstadoTxt.getText();
+				
+				codto.setCodigo(codigo);
+				codto.setDescripcion(descripcion);
+				codto.setEstado(estado);
+				codto.setNombre(nombre);
+				
+				controlCod.GuardarCodigos(codto);
+			}
+		});
+		codigosGuardarBtn.setBounds(10, 196, 115, 23);
+		panel_6.add(codigosGuardarBtn);
 		
-		JButton btnLimpiar_2 = new JButton("Limpiar");
-		btnLimpiar_2.setBounds(157, 196, 123, 23);
-		panel_6.add(btnLimpiar_2);
+		JButton codigosLimpiarBtn = new JButton("Limpiar");
+		codigosLimpiarBtn.setBounds(157, 196, 123, 23);
+		panel_6.add(codigosLimpiarBtn);
 	}
 }

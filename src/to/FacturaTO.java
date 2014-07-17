@@ -6,6 +6,8 @@ public class FacturaTO {
 	private String numero;
 	private String nit_proveedor;
 	private Date fecha_compra;
+	
+	
 	public String getNumero() {
 		return numero;
 	}

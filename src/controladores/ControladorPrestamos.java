@@ -1,5 +1,6 @@
 package controladores;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,6 +12,7 @@ import util.EntityManagerUtil;
 
 public class ControladorPrestamos {
 	private EntityManager em = EntityManagerUtil.getEntityManager();
+	Prestamos prestamos = new Prestamos();
 	
 	@SuppressWarnings("unchecked")
 	public Object[][] ActivosAsignados(PrestamosTO prestamosTO){
@@ -54,6 +56,34 @@ public class ControladorPrestamos {
 			
 		}
 		return datos;
+	}
+	
+	
+	public void GuardarPrestamo(PrestamosTO prestamoTO){
+		String id = prestamoTO.getId();
+		Date fecha_prestamo = prestamoTO.getFecha_prestamo();
+		Date fecha_entrega = prestamoTO.getFecha_entrega();
+		String asignado = prestamoTO.getAsignado();
+		String estado_retorno = prestamoTO.getEstado_retorno();		
+		int obra_prestamo = prestamoTO.getObra_prestamo();
+		String serial_activo = prestamoTO.getSerial_activo();	
+		
+		try {
+			em.getTransaction().begin();
+			prestamos.setAsignado(asignado);
+			prestamos.setEstado_retorno(estado_retorno);
+			prestamos.setFecha_entrega(fecha_entrega);
+			prestamos.setFecha_prestamo(fecha_prestamo);
+			prestamos.setId(id);
+			prestamos.setObra_prestamo(obra_prestamo);
+			prestamos.setSerial_activo(serial_activo);
+			em.persist(prestamos);
+			em.getTransaction().commit();
+			
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 }
