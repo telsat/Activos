@@ -104,7 +104,7 @@ public class tablasGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public tablasGUI() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 583, 345);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -243,6 +243,20 @@ public class tablasGUI extends JFrame {
 		panel.add(activoGuardarBtn);
 		
 		JButton activoLimpiarBtn = new JButton("Limpiar");
+		activoLimpiarBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				telsatSerialTxt.setText(null);
+				activoSerialTxt.setText(null);
+				modeloTxt.setText(null);
+				descripcionTxt.setText(null);
+				proveeNitTxt.setText(null);
+				ActFacturaTxt.setText(null);
+				fotoTxt.setText(null);
+				EstadoTxt.setText(null);
+				precioTxt.setText(null);
+				tipoActivoTxt.setText(null);
+			}
+		});
 		activoLimpiarBtn.setBounds(159, 245, 127, 23);
 		panel.add(activoLimpiarBtn);
 		
@@ -340,6 +354,18 @@ public class tablasGUI extends JFrame {
 		panel_1.add(proveedorGuardarBtn);
 		
 		JButton proveedorLimpiarBtn = new JButton("Limpiar");
+		proveedorLimpiarBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				NitTxt.setText(null);
+				proveedorNombreTxt.setText(null);
+				direccionTxt.setText(null);
+				telefonoTxt.setText(null);
+				contactoTxt.setText(null);
+				mailTxt.setText(null);
+				filtroTxt.setText(null);
+				
+			}
+		});
 		proveedorLimpiarBtn.setBounds(171, 206, 106, 23);
 		panel_1.add(proveedorLimpiarBtn);
 		
@@ -394,6 +420,14 @@ public class tablasGUI extends JFrame {
 		panel_2.add(facturaGuardarBtn);
 		
 		JButton facturaLimpiarBtn = new JButton("Limpiar");
+		facturaLimpiarBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				facturaNumeroTxt.setText(null);
+				facturaNitTxt.setText(null);
+				fechaCompraTxt.setText(null);
+				
+			}
+		});
 		facturaLimpiarBtn.setBounds(171, 160, 89, 23);
 		panel_2.add(facturaLimpiarBtn);
 		
@@ -433,6 +467,12 @@ public class tablasGUI extends JFrame {
 		panel_3.add(obraGuardarBtn);
 		
 		JButton obraLimpiarBtn = new JButton("Limpiar");
+		obraLimpiarBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				idObraTxt.setText(null);	
+				obraNombreTxt.setText(null);				
+			}
+		});
 		obraLimpiarBtn.setBounds(176, 131, 106, 23);
 		panel_3.add(obraLimpiarBtn);
 		
@@ -485,6 +525,13 @@ public class tablasGUI extends JFrame {
 		panel_4.add(personaGuardarBtn);
 		
 		JButton personaLimpiarBtn = new JButton("Limpiar");
+		personaLimpiarBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cedulaTxt.setText(null);
+				personaNombreTxt.setText(null);
+				apellidoTxt.setText(null);			
+			}
+		});
 		personaLimpiarBtn.setBounds(195, 189, 123, 23);
 		panel_4.add(personaLimpiarBtn);
 		
@@ -569,6 +616,16 @@ public class tablasGUI extends JFrame {
 		panel_5.add(prestamosGuardarBtn);
 		
 		JButton prestamosLimpiar = new JButton("Limpiar");
+		prestamosLimpiar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				fechaPrestamoTxt.setText(null);
+				fechaEntregaTxt.setText(null);
+				asignadoTxt.setText(null);
+				estadoRetornoTxt.setText(null);
+				obraPrestadoTxt.setText(null);				
+				serialPrestamoTxt.setText(null);				
+			}
+		});
 		prestamosLimpiar.setBounds(175, 226, 133, 23);
 		panel_5.add(prestamosLimpiar);
 		
@@ -632,6 +689,14 @@ public class tablasGUI extends JFrame {
 		panel_6.add(codigosGuardarBtn);
 		
 		JButton codigosLimpiarBtn = new JButton("Limpiar");
+		codigosLimpiarBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				codigoTxt.setText(null);
+				codigoNombreTxt.setText(null);
+				codigoDescripcionTxt.setText(null);
+				codigoEstadoTxt.setText(null);
+			}
+		});
 		codigosLimpiarBtn.setBounds(157, 196, 123, 23);
 		panel_6.add(codigosLimpiarBtn);
 	}

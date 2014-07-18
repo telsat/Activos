@@ -165,5 +165,15 @@ public class ActivosGUI extends JFrame {
 		});
 		btnNewButton.setBounds(320, 186, 151, 23);
 		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Llenar Tablas");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tablasGUI tg = new tablasGUI();
+				tg.setVisible(true);
+			}
+		});
+		btnNewButton_1.setBounds(320, 245, 151, 23);
+		contentPane.add(btnNewButton_1);
 	}
 }
