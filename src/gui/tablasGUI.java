@@ -25,11 +25,17 @@ import to.ObraTO;
 import to.PersonaTO;
 import to.PrestamosTO;
 import to.ProveedorTO;
+import util.FechasParser;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class tablasGUI extends JFrame {
+	
+	FechasParser fp = new FechasParser();
 	
 	ActivoTO ato = new ActivoTO();
 	FacturaTO fto = new FacturaTO();
@@ -403,13 +409,16 @@ public class tablasGUI extends JFrame {
 		JButton facturaGuardarBtn = new JButton("Guardar");
 		facturaGuardarBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String fechaCompra = fechaCompraTxt.getText();
+				
+				String fechaComp = fechaCompraTxt.getText();
 				
 				String numero = facturaNumeroTxt.getText();
 				String facturaNit = facturaNitTxt.getText();
-				
+				Date fechaCompra = null;
+				fechaCompra = fp.parseFecha(fechaComp);
 				fto.setNit_proveedor(facturaNit);
 				fto.setNumero(numero);
+				fto.setFecha_compra(fechaCompra);
 				
 				cf.GuardarFactura(fto);
 				
@@ -603,12 +612,14 @@ public class tablasGUI extends JFrame {
 				String obraPrestamo = obraPrestadoTxt.getText();
 				int obraP = Integer.parseInt(obraPrestamo);
 				String serialPres = serialPrestamoTxt.getText();
-				
+				Date fechaPrestamo = fp.parseFecha(fechaPres);
+				Date fechaEntrega = fp.parseFecha(fechaEntr);
 				presto.setAsignado(asignado);
 				presto.setEstado_retorno(estadoRet);
 				presto.setObra_prestamo(obraP);
 				presto.setSerial_activo(serialPres);
-				
+				presto.setFecha_prestamo(fechaPrestamo);
+				presto.setFecha_entrega(fechaEntrega);
 				controlPres.GuardarPrestamo(presto);
 			}
 		});
