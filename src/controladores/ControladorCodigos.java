@@ -29,7 +29,7 @@ public class ControladorCodigos {
 		for(int x = 0; x < size; x++){
 			String cod = codigos[x][0] = lista.get(x).getCodigo();
 			String name = codigos[x][1] = lista.get(x).getNombre();
-			nombre = cod +" - "+ name;
+			nombre = cod +"-"+ name;
 			codes[x] = nombre;
 		}	
 		

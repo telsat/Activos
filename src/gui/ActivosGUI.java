@@ -18,6 +18,8 @@ import controladores.ControladorPrestamos;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 @SuppressWarnings({ "serial", "unused" })
@@ -153,6 +155,14 @@ public class ActivosGUI extends JFrame {
 		contentPane.add(obrasBtn);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int fila = table.getSelectedRow();
+				String serial = (String) table.getValueAt(fila, 4);
+				serialTxt.setText(serial);
+			}
+		});
 		table.setBounds(22, 369, 621, 199);
 		contentPane.add(table);
 		
