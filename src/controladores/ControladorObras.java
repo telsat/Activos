@@ -11,7 +11,7 @@ public class ControladorObras {
 	Obra obra = new Obra();
 	
 	public void GuardarObra(ObraTO obraTO){
-		String id = obraTO.getId();
+		int id = obraTO.getId();
 		String nombre = obraTO.getNombre();
 		
 		try {

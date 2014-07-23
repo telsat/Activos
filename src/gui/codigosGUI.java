@@ -71,7 +71,7 @@ public class codigosGUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Object nombres = nombresCbx.getSelectedItem();
 				String names = nombres.toString();
-				String[] nomb = names.split(" - ");				
+				String[] nomb = names.split("-");				
 				String cod = codigoTxt.getText()+nomb[0];
 				codigoTxt.setText(cod);
 			}

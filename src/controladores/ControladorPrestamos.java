@@ -60,21 +60,17 @@ public class ControladorPrestamos {
 	
 	
 	public void GuardarPrestamo(PrestamosTO prestamoTO){
-		String id = prestamoTO.getId();
-		Date fecha_prestamo = prestamoTO.getFecha_prestamo();
-		Date fecha_entrega = prestamoTO.getFecha_entrega();
-		String asignado = prestamoTO.getAsignado();
-		String estado_retorno = prestamoTO.getEstado_retorno();		
+		
+		Date fecha_prestamo = prestamoTO.getFecha_prestamo();		
+		String asignado = prestamoTO.getAsignado();			
 		int obra_prestamo = prestamoTO.getObra_prestamo();
 		String serial_activo = prestamoTO.getSerial_activo();	
-		
+		int id = prestamoTO.getId();
 		try {
 			em.getTransaction().begin();
 			prestamos.setAsignado(asignado);
-			prestamos.setEstado_retorno(estado_retorno);
-			prestamos.setFecha_entrega(fecha_entrega);
-			prestamos.setFecha_prestamo(fecha_prestamo);
-			prestamos.setId(id);
+			prestamos.setId(id);			
+			prestamos.setFecha_prestamo(fecha_prestamo);			
 			prestamos.setObra_prestamo(obra_prestamo);
 			prestamos.setSerial_activo(serial_activo);
 			em.persist(prestamos);
@@ -84,6 +80,33 @@ public class ControladorPrestamos {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public void RegistrarDevolucion(PrestamosTO prestamoTO){
+		String serial = prestamoTO.getSerial_activo();
+		Date fecha_entrega = prestamoTO.getFecha_entrega();
+		String estado = prestamoTO.getEstado_retorno();
+		String consulta = "SELECT MAX(id) FROM prestamos WHERE serial_activo = '"+serial+"';";
+		Query query = em.createNativeQuery(consulta);
+		
+		
+		int id = (int) query.getSingleResult();			
+		
+		System.out.println("idddddddddddddd"+id);		
+		
+		Prestamos pres = em.find(Prestamos.class, id);
+		if(pres!=null){
+			em.getTransaction().begin();
+			pres.setEstado_retorno(estado);
+			pres.setFecha_entrega(fecha_entrega);
+			em.persist(pres);
+			em.getTransaction().commit();
+		}
+		
+		
+		
 	}
 
 }

@@ -10,6 +10,8 @@ import to.ActivoTO;
 import util.EntityManagerUtil;
 
 public class ControladorActivos {
+	
+	
 	private EntityManager em = EntityManagerUtil.getEntityManager();
 	Activo activo = new Activo();
 	
@@ -59,6 +61,22 @@ public class ControladorActivos {
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+		}
+		
+	}
+	
+	
+	public void RegistrarPrestamo(ActivoTO activoTO){
+		String serialT = activoTO.getSerial_telsat();
+		String estado = activoTO.getEstado();
+		
+		Activo act = em.find(Activo.class,serialT);
+		if(act!=null){
+			em.getTransaction().begin();
+			act.setEstado(estado);
+			em.persist(act);
+			em.getTransaction().commit();
+			
 		}
 		
 	}

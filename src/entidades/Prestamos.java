@@ -2,7 +2,10 @@ package entidades;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -14,20 +17,22 @@ import javax.persistence.TemporalType;
 public class Prestamos {
 	
 	@Id
-	private String id;
-	@Temporal(TemporalType.TIME)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+	@Column(name="id")
+	private int id;
+	@Temporal(TemporalType.DATE)
 	private Date fecha_prestamo;
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.DATE)
 	private Date fecha_entrega;
 	private String asignado;
 	private String estado_retorno;
 	private int obra_prestamo;
 	private String serial_activo;
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public Date getFecha_prestamo() {

@@ -15,6 +15,7 @@
       		<property name="javax.persistence.jdbc.password" value="admin123" />
       		<property name="eclipselink.ddl-generation" value="create-tables" />
       		<property name="eclipselink.ddl-generation.output-mode" value="database" />
+      		<property name="eclipselink.jpa.uppercase-column-names" value="true"/>
     	</properties>
 	</persistence-unit>
 </persistence>

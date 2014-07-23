@@ -3,7 +3,7 @@ package to;
 import java.util.Date;
 
 public class PrestamosTO {
-	private String id;
+	private int id;
 	private Date fecha_prestamo;
 	private Date fecha_entrega;
 	private String asignado;
@@ -12,10 +12,10 @@ public class PrestamosTO {
 	private String serial_activo;
 	
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public Date getFecha_prestamo() {

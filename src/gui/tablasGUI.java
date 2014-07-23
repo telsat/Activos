@@ -465,7 +465,8 @@ public class tablasGUI extends JFrame {
 		JButton obraGuardarBtn = new JButton("Guardar");
 		obraGuardarBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String idObra = idObraTxt.getText();
+				String idOb = idObraTxt.getText();
+				int idObra = Integer.parseInt(idOb);
 				String obraNombre = obraNombreTxt.getText();
 				oto.setId(idObra);
 				oto.setNombre(obraNombre);
@@ -602,28 +603,34 @@ public class tablasGUI extends JFrame {
 		panel_5.add(serialPrestamoTxt);
 		serialPrestamoTxt.setColumns(10);
 		
-		JButton prestamosGuardarBtn = new JButton("Guardar");
+		JButton prestamosGuardarBtn = new JButton("Registrar Prestamo");
 		prestamosGuardarBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String fechaPres = fechaPrestamoTxt.getText();
-				String fechaEntr = fechaEntregaTxt.getText();
+				String fechaPres = fechaPrestamoTxt.getText();				
 				String asignado = asignadoTxt.getText();
-				String estadoRet = estadoRetornoTxt.getText();
+				
 				String obraPrestamo = obraPrestadoTxt.getText();
 				int obraP = Integer.parseInt(obraPrestamo);
 				String serialPres = serialPrestamoTxt.getText();
 				Date fechaPrestamo = fp.parseFecha(fechaPres);
-				Date fechaEntrega = fp.parseFecha(fechaEntr);
+				
 				presto.setAsignado(asignado);
-				presto.setEstado_retorno(estadoRet);
+				
 				presto.setObra_prestamo(obraP);
 				presto.setSerial_activo(serialPres);
 				presto.setFecha_prestamo(fechaPrestamo);
-				presto.setFecha_entrega(fechaEntrega);
+							
 				controlPres.GuardarPrestamo(presto);
+				
+				ato.setEstado("prestado");
+				ato.setSerial_telsat(serialPres);
+				contrActivos.RegistrarPrestamo(ato);
+				
+				
+				
 			}
 		});
-		prestamosGuardarBtn.setBounds(10, 226, 119, 23);
+		prestamosGuardarBtn.setBounds(10, 226, 150, 23);
 		panel_5.add(prestamosGuardarBtn);
 		
 		JButton prestamosLimpiar = new JButton("Limpiar");
@@ -637,8 +644,30 @@ public class tablasGUI extends JFrame {
 				serialPrestamoTxt.setText(null);				
 			}
 		});
-		prestamosLimpiar.setBounds(175, 226, 133, 23);
+		prestamosLimpiar.setBounds(203, 226, 133, 23);
 		panel_5.add(prestamosLimpiar);
+		
+		JButton btnNewButton = new JButton("Registrar Devolucion");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String fecha_retorno = fechaEntregaTxt.getText();
+				Date fecha_entrega = fp.parseFecha(fecha_retorno);				
+				String estadoRet = estadoRetornoTxt.getText();
+				String serial = serialPrestamoTxt.getText();
+				presto.setEstado_retorno(estadoRet);
+				presto.setFecha_entrega(fecha_entrega);
+				presto.setSerial_activo(serial);
+				controlPres.RegistrarDevolucion(presto);
+				
+				ato.setEstado("entregado");
+				ato.setSerial_telsat(serial);
+				contrActivos.RegistrarPrestamo(ato);
+				
+				
+			}
+		});
+		btnNewButton.setBounds(358, 226, 161, 23);
+		panel_5.add(btnNewButton);
 		
 		JPanel panel_6 = new JPanel();
 		tabbedPane.addTab("Codigos", null, panel_6, null);
