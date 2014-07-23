@@ -41,7 +41,7 @@ public class ControladorPrestamos {
 	
 	@SuppressWarnings("unchecked")
 	public Object[][] EquiposEnObra(int obraId){
-		String quer = "SELECT * FROM prestamos WHERE obra_prestamo = '"+obraId+"';";
+		String quer = "SELECT * FROM prestamos WHERE obra_prestamo = '"+obraId+"' and fecha_entrega = null;";
 		Query query = em.createNativeQuery(quer,Prestamos.class);
 		List<Prestamos> activos = query.getResultList();
 		int size = activos.size();
@@ -89,12 +89,9 @@ public class ControladorPrestamos {
 		Date fecha_entrega = prestamoTO.getFecha_entrega();
 		String estado = prestamoTO.getEstado_retorno();
 		String consulta = "SELECT MAX(id) FROM prestamos WHERE serial_activo = '"+serial+"';";
-		Query query = em.createNativeQuery(consulta);
+		Query query = em.createNativeQuery(consulta);		
 		
-		
-		int id = (int) query.getSingleResult();			
-		
-		System.out.println("idddddddddddddd"+id);		
+		int id = (int) query.getSingleResult();					
 		
 		Prestamos pres = em.find(Prestamos.class, id);
 		if(pres!=null){

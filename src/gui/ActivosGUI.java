@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JScrollPane;
 
 
 @SuppressWarnings({ "serial", "unused" })
@@ -71,7 +72,7 @@ public class ActivosGUI extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		final ControladorActivos ca = new ControladorActivos();
-		final String[] columnasCa = {"serial","tipo activo","modelo"};
+		final String[] columnasCa = {"serial telsat","Modelo","serial"};
 		final ControladorPrestamos cp = new ControladorPrestamos();
 		final String[] columnasCp = {"estado retorno","fecha prestamo","fecha entrega","obra prestamo","serial activo","asignado"};
 		final PrestamosTO prestamosTO = new PrestamosTO();
@@ -154,18 +155,6 @@ public class ActivosGUI extends JFrame {
 		obrasBtn.setBounds(320, 79, 89, 23);
 		contentPane.add(obrasBtn);
 		
-		table = new JTable();
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				int fila = table.getSelectedRow();
-				String serial = (String) table.getValueAt(fila, 4);
-				serialTxt.setText(serial);
-			}
-		});
-		table.setBounds(22, 369, 621, 199);
-		contentPane.add(table);
-		
 		JButton btnNewButton = new JButton("nombrar activo");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -185,5 +174,20 @@ public class ActivosGUI extends JFrame {
 		});
 		btnNewButton_1.setBounds(320, 245, 151, 23);
 		contentPane.add(btnNewButton_1);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(22, 339, 633, 213);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int fila = table.getSelectedRow();
+				String serial = (String) table.getValueAt(fila, 4);
+				serialTxt.setText(serial);
+			}
+		});
 	}
 }

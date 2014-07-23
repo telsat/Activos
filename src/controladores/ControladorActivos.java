@@ -23,9 +23,10 @@ public class ControladorActivos {
 		int size = activos.size();
 		Object [][] datos = new Object[size][10];
 		for(int x = 0; x < size; x++){
-			datos[x][0] = activos.get(x).getSerial();
-			datos[x][1] = activos.get(x).getTipo_activo();
-			datos[x][2] = activos.get(x).getModelo();			
+			datos[x][0] = activos.get(x).getSerial_telsat();
+			datos[x][1] = activos.get(x).getModelo();	
+			datos[x][2] = activos.get(x).getSerial();
+			
 			
 		}		
 		return datos;
