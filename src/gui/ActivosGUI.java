@@ -72,7 +72,7 @@ public class ActivosGUI extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		final ControladorActivos ca = new ControladorActivos();
-		final String[] columnasCa = {"serial telsat","Modelo","serial"};
+		final String[] columnasCa = {"serial telsat","Modelo","serial","Descripcion","Factura Nro"};
 		final ControladorPrestamos cp = new ControladorPrestamos();
 		final String[] columnasCp = {"estado retorno","fecha prestamo","fecha entrega","obra prestamo","serial activo","asignado"};
 		final PrestamosTO prestamosTO = new PrestamosTO();

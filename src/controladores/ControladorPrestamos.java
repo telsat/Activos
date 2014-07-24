@@ -41,7 +41,7 @@ public class ControladorPrestamos {
 	
 	@SuppressWarnings("unchecked")
 	public Object[][] EquiposEnObra(int obraId){
-		String quer = "SELECT * FROM prestamos WHERE obra_prestamo = '"+obraId+"' and fecha_entrega = null;";
+		String quer = "SELECT * FROM prestamos WHERE obra_prestamo = '"+obraId+"' and fecha_entrega is null;";
 		Query query = em.createNativeQuery(quer,Prestamos.class);
 		List<Prestamos> activos = query.getResultList();
 		int size = activos.size();
@@ -83,7 +83,6 @@ public class ControladorPrestamos {
 	}
 	
 	
-	@SuppressWarnings("unchecked")
 	public void RegistrarDevolucion(PrestamosTO prestamoTO){
 		String serial = prestamoTO.getSerial_activo();
 		Date fecha_entrega = prestamoTO.getFecha_entrega();

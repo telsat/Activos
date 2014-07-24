@@ -26,6 +26,8 @@ public class ControladorActivos {
 			datos[x][0] = activos.get(x).getSerial_telsat();
 			datos[x][1] = activos.get(x).getModelo();	
 			datos[x][2] = activos.get(x).getSerial();
+			datos[x][3] = activos.get(x).getDescripcion();
+			datos[x][4] = activos.get(x).getFactura();
 			
 			
 		}		
