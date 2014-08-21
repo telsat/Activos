@@ -28,7 +28,22 @@ public class Prestamos {
 	private String estado_retorno;
 	private int obra_prestamo;
 	private String serial_activo;
+	private String nombrepersona;
+	private String nombreobra;
 	
+	
+	public String getNombrepersona() {
+		return nombrepersona;
+	}
+	public void setNombrepersona(String nombrepersona) {
+		this.nombrepersona = nombrepersona;
+	}
+	public String getNombreobra() {
+		return nombreobra;
+	}
+	public void setNombreobra(String nombreobra) {
+		this.nombreobra = nombreobra;
+	}
 	public int getId() {
 		return id;
 	}

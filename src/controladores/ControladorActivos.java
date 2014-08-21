@@ -27,8 +27,7 @@ public class ControladorActivos {
 			datos[x][1] = activos.get(x).getModelo();	
 			datos[x][2] = activos.get(x).getSerial();
 			datos[x][3] = activos.get(x).getDescripcion();
-			datos[x][4] = activos.get(x).getFactura();
-			
+			datos[x][4] = activos.get(x).getFactura();			
 			
 		}		
 		return datos;

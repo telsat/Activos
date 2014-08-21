@@ -26,12 +26,14 @@ public class ControladorPrestamos {
 		Object [][] datos = new Object[size][7];
 		
 		for(int x = 0;x<size;x++){
-			datos[x][0] = prestamos.get(x).getEstado_retorno();
-			datos[x][1] = prestamos.get(x).getFecha_prestamo();
-			datos[x][2] = prestamos.get(x).getFecha_entrega();
+			datos[x][2] = prestamos.get(x).getEstado_retorno();
+			datos[x][0] = prestamos.get(x).getFecha_prestamo();
+			datos[x][1] = prestamos.get(x).getFecha_entrega();
 			datos[x][3] = prestamos.get(x).getObra_prestamo();
 			datos[x][4] = prestamos.get(x).getSerial_activo();
 			datos[x][5] = prestamos.get(x).getAsignado();
+			datos[x][6] = prestamos.get(x).getNombrepersona();
+			datos[x][7] = prestamos.get(x).getNombreobra();
 			
 		}	
 		

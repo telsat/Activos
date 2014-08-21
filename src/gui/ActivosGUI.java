@@ -14,13 +14,17 @@ import javax.swing.JTable;
 
 import to.PrestamosTO;
 import controladores.ControladorActivos;
+import controladores.ControladorObras;
+import controladores.ControladorPersonas;
 import controladores.ControladorPrestamos;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JScrollPane;
+import java.awt.Color;
 
 
 @SuppressWarnings({ "serial", "unused" })
@@ -56,8 +60,9 @@ public class ActivosGUI extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		setBounds(100, 100, 716, 628);
+		setBounds(100, 100, 953, 628);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(102, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -74,15 +79,19 @@ public class ActivosGUI extends JFrame {
 		final ControladorActivos ca = new ControladorActivos();
 		final String[] columnasCa = {"serial telsat","Modelo","serial","Descripcion","Factura Nro"};
 		final ControladorPrestamos cp = new ControladorPrestamos();
-		final String[] columnasCp = {"estado retorno","fecha prestamo","fecha entrega","obra prestamo","serial activo","asignado"};
+		final String[] columnasCp = {"fecha prestamo","fecha entrega","estado retorno","obra prestamo","serial activo","asignado","nombre empleado","nombre de obra"};
 		final PrestamosTO prestamosTO = new PrestamosTO();
+		final String[] columnasPers = {"cedula","nombre","apellido"};
+		final String[] columnasObra = {"id de obra","nombre de obra"};
+		final ControladorPersonas controlPers = new ControladorPersonas();
+		final ControladorObras controlObra = new ControladorObras();
 		JButton EstadoBtn = new JButton("consultar");
 		EstadoBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String estado = estadoActivoTxt.getText();
 				Object[][]datos = ca.EstadoActivos(estado);
 				
-				table.setModel(new DefaultTableModel(datos,columnasCa));
+				table.setModel(new DefaultTableModel(datos,columnasCp));
 								
 			}
 		});
@@ -176,11 +185,31 @@ public class ActivosGUI extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(22, 339, 633, 213);
+		scrollPane.setBounds(22, 339, 905, 213);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		JButton btnNewButton_2 = new JButton("Listar Personas");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Object[][] Datos = controlPers.ListaPersonas();
+				table.setModel(new DefaultTableModel(Datos,columnasPers));
+			}
+		});
+		btnNewButton_2.setBounds(535, 186, 142, 23);
+		contentPane.add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("Listar Obras");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Object[][] Datos = controlObra.ListarObras();
+				table.setModel(new DefaultTableModel(Datos,columnasObra));
+			}
+		});
+		btnNewButton_3.setBounds(535, 228, 142, 23);
+		contentPane.add(btnNewButton_3);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
