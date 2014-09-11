@@ -23,14 +23,14 @@ public class ControladorCodigos {
 		Query query = em.createNativeQuery(select,Codigos.class);
 		List<Codigos> lista = query.getResultList();
 		int size = lista.size();
-		String[][] codigos = new String[size][2];
+		String[][] codigos = new String[size][];
 		String[] codes = {""};
-		String nombre;
+		//String nombre;
 		for(int x = 0; x < size; x++){
 			String cod = codigos[x][0] = lista.get(x).getCodigo();
-			String name = codigos[x][1] = lista.get(x).getNombre();
-			nombre = cod +"-"+ name;
-			codes[x] = nombre;
+			//String name = codigos[x][1] = lista.get(x).getNombre();
+			//nombre = cod +"-"+ name;
+			codes[x] = cod;
 		}	
 		
 		return codes;

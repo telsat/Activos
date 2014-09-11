@@ -17,6 +17,7 @@ import controladores.ControladorActivos;
 import controladores.ControladorObras;
 import controladores.ControladorPersonas;
 import controladores.ControladorPrestamos;
+import controladores.Excel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -24,7 +25,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JScrollPane;
+
 import java.awt.Color;
+import java.util.Vector;
 
 
 @SuppressWarnings({ "serial", "unused" })
@@ -62,7 +65,7 @@ public class ActivosGUI extends JFrame {
 		
 		setBounds(100, 100, 953, 628);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(102, 204, 255));
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -85,6 +88,7 @@ public class ActivosGUI extends JFrame {
 		final String[] columnasObra = {"id de obra","nombre de obra"};
 		final ControladorPersonas controlPers = new ControladorPersonas();
 		final ControladorObras controlObra = new ControladorObras();
+		final Excel excel = new Excel();
 		JButton EstadoBtn = new JButton("consultar");
 		EstadoBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -185,7 +189,7 @@ public class ActivosGUI extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(22, 339, 905, 213);
+		scrollPane.setBounds(22, 366, 905, 213);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -210,6 +214,18 @@ public class ActivosGUI extends JFrame {
 		});
 		btnNewButton_3.setBounds(535, 228, 142, 23);
 		contentPane.add(btnNewButton_3);
+		
+		JButton btnGuardarDatosEn = new JButton("Guardar Tabla En Excel");
+		btnGuardarDatosEn.addActionListener(new ActionListener() {
+			@SuppressWarnings("rawtypes")
+			public void actionPerformed(ActionEvent arg0) {
+				DefaultTableModel model = (DefaultTableModel) table.getModel();
+				Vector datos = model.getDataVector();
+				excel.GuardarDatos(datos);
+			}
+		});
+		btnGuardarDatosEn.setBounds(22, 332, 222, 23);
+		contentPane.add(btnGuardarDatosEn);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
